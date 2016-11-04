@@ -31,38 +31,17 @@ def blur(current, k, radius):
 						current.im.putpixel((a, b), currentColor)
 
 
-step = 1
-# slow at first
-for f in range(5, 15, 2):
+for f in range(0, 15):
 	currentImg = previous.copy()
-	blur(currentImg, f, 10)
-	print("saving generation " + str(step))
-	currentImg.save(filename(step))
-	previous = currentImg
-	step +=1
-
-for f in range(1,20):
-	newImg = base.copy()
-	if( f % 2 == 0):
-		blur(newImg, 15, 15)
-	else:
-		blur(newImg, 14, 15)
-	print("saving generation " + str(step))
-	newImg.save(filename(step))
-	step += 1
-
-
-currentImg = base.copy()
-for f in range(5, 15, 2):
 	blur(currentImg, f, 15)
-	# heart(currentImg, f, 16, base)
-	print("saving generation " + str(step + f))
-	currentImg.save(filename(step + 35 - f))
+	print("saving generation " + str(f))
+	currentImg.save(filename(f))
 	previous = currentImg
-	currentImg = previous.copy()
+
 
 
 
 print("generating gif")
 os.system("convert -size 80% -quality 60% out*.png out.gif")
+os.system("rm *.png")
 print("All done")
