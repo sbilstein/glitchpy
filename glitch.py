@@ -3,19 +3,7 @@ from PIL import Image
 import sys
 import os
 import math 
-import socket
 import time
-
-port = 6668
-host = "10.0.0.37"
-
-try:
-    s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-except socket.error:
-    print 'Failed to create socket'
-    sys.exit()
-
-
 
 image = sys.argv[1]
 base = Image.open(image)
@@ -24,17 +12,6 @@ base.load() # array indexable by x,y
 
 (width, height) = base.size
 previous = base.copy()
-
-# set x y r g b
-def sendPixel(x, y, r, g, b):
-	msg = "set {0} {1} {2} {3} {4}".format(x,y,r,g,b)
-	print msg
-	try:
-		
-		s.sendto(msg, (host, port))
-	except socket.error, msg:
-		print 'Error Code : ' + str(msg[0]) + ' Message ' + msg[1]
-		sys.exit()
 
 def filename(step):
 	return "out" + str(step).zfill(4) + ".png"
