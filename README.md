@@ -5,4 +5,4 @@ sudo pip install Pillow
 http://www.imagemagick.org/script/index.php
 
 # Make a picture
-python gltich.py 'someimage'
+python glitch.py 'someimage'
